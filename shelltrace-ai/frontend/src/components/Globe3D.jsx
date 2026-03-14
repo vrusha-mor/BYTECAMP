@@ -75,8 +75,10 @@ function CountryBorders() {
       const coastBuf = [];
       const land = topo.feature(world, world.objects.land);
       const lg = land.geometry;
-      if (lg.type === 'Polygon')      lg.coordinates.forEach(c => ring(c, coastBuf, R + 0.1));
-      if (lg.type === 'MultiPolygon') lg.coordinates.forEach(p => p.forEach(c => ring(c, coastBuf, R + 0.1)));
+      if (lg) {
+        if (lg.type === 'Polygon')      lg.coordinates.forEach(c => ring(c, coastBuf, R + 0.1));
+        if (lg.type === 'MultiPolygon') lg.coordinates.forEach(p => p.forEach(c => ring(c, coastBuf, R + 0.1)));
+      }
       setCoastGeo(new THREE.BufferGeometry().setAttribute('position', new THREE.Float32BufferAttribute(new Float32Array(coastBuf), 3)));
     }).catch(e => console.error('Globe data error:', e));
     return () => { dead = true; };

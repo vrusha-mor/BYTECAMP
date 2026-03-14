@@ -5,23 +5,25 @@ import {
   Activity, 
   Sparkles, 
   FileText,
-  ChevronRight
+  ChevronRight,
+  AlertTriangle
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function RightPanel({ onNavigate }) {
   
   const metrics = [
-    { name: 'TOTAL_FLOW', value: '$42.5B', icon: BarChart3, color: 'var(--primary-color)' },
-    { name: 'RISK_ENTITIES', value: '3,842', icon: ShieldAlert, color: 'var(--accent-orange)' },
-    { name: 'ACTIVE_ALERTS', value: '415', icon: Bell, color: 'var(--alert-red)' },
-    { name: 'NET_LATENCY', value: '14ms', icon: Activity, color: 'var(--electric-blue)' },
+    { name: 'TOTAL_FLOW', value: '$42.5B', icon: BarChart3, color: '#bc00ff' },
+    { name: 'RISK_ENTITIES', value: '3,842', icon: ShieldAlert, color: '#f59e0b' },
+    { name: 'ACTIVE_ALERTS', value: '415', icon: Bell, color: '#ff4155' },
+    { name: 'NET_LATENCY', value: '14ms', icon: Activity, color: '#00d2ff' },
   ];
 
   const recentAlerts = [
-    { id: 'TX-99', entity: 'Nexus Trading', type: 'Circular Flow', risk: 'Critical', time: '2m ago' },
-    { id: 'TX-82', entity: 'Oasis Real Estate', type: 'Smurfing', risk: 'High', time: '12m ago' },
-    { id: 'TX-41', entity: 'Global Tech', type: 'Layering', risk: 'Medium', time: '41m ago' },
+    { id: 'TX-99', entity: 'Nexus Trading', type: 'Circular Flow', time: '144 ago', risk: 'Critical' },
+    { id: 'TX-82', entity: 'Oasis Real Estate', type: 'Fan-In', time: '22 minute ago', risk: 'High' },
+    { id: 'TX-41', entity: 'Global Tech', type: 'Layering', time: '13 mons ago', risk: 'Medium' },
+    { id: 'TX-33', entity: 'Sphere Investments', type: 'Fan-Out', time: '11d ago', risk: 'Low' },
   ];
 
   return (
@@ -31,7 +33,7 @@ export default function RightPanel({ onNavigate }) {
         {metrics.map((m) => (
           <div key={m.name} className="glass-card" style={styles.metricCard}>
             <div style={styles.metricHeader}>
-              <m.icon size={14} color={m.color} />
+              <m.icon size={12} color={m.color} />
               <span style={styles.metricName} className="mono">{m.name}</span>
             </div>
             <div style={styles.metricValue} className="mono">{m.value}</div>
@@ -47,21 +49,23 @@ export default function RightPanel({ onNavigate }) {
           </div>
           <div style={styles.aiInfo}>
             <div style={styles.aiTitle}>AI COMPLIANCE OFFICER</div>
-            <div style={styles.aiStatus} className="mono">ANALYZING_CLUSTER_SH-992</div>
+            <div style={styles.aiStatus} className="mono">ANALYZING_CLUSTER_991-99S</div>
           </div>
         </div>
         
         <div style={styles.aiContent}>
-          <div style={styles.aiDraft}>
-            <p style={styles.aiText}>
-              Suspicious 3-hop circular flow detected between <span style={{color: 'var(--accent-orange)', fontWeight: 700}}>Nexus Trading</span> and shell offshore entities. 
-              Layering depth exceeds risk threshold (7.2/10).
-            </p>
-            <button className="btn btn-primary" style={styles.sarBtn}>
-              <FileText size={14} />
-              DRAFT SAR REPORT
-            </button>
+          <div style={styles.aiAlertHeader}>
+            <AlertTriangle size={14} color="var(--alert-red)" />
+            <span style={{ fontSize: '0.7rem', color: 'var(--alert-red)', fontWeight: 800 }}>Suspicious Pattern Detected</span>
           </div>
+          <h4 style={{ margin: '8px 0 4px 0', fontSize: '1rem', color: '#ffffff' }}>Circular Flow</h4>
+          <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)', margin: '0 0 4px 0' }}>Accounts: 24 — 150 — 72 ~ 24</p>
+          <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)', margin: '0 0 16px 0' }}>Risk Score: <span style={{ color: '#ffffff', fontWeight: 700 }}>92%</span></p>
+          
+          <button className="btn btn-primary" style={styles.sarBtn}>
+            <FileText size={14} />
+            DRAFT SAR REPORT
+          </button>
         </div>
       </div>
 
@@ -69,7 +73,7 @@ export default function RightPanel({ onNavigate }) {
       <div style={styles.feedColumn}>
         <div style={styles.feedHeader}>
           <span style={styles.feedTitle}>NETWORK FEED</span>
-          <span style={styles.feedCount}>12 NEW</span>
+          <span style={styles.feedCount}>◆ NEW</span>
         </div>
         
         <div style={styles.alertList}>
@@ -80,10 +84,6 @@ export default function RightPanel({ onNavigate }) {
               style={styles.alertItem}
               className="alert-item-hover"
             >
-              <div style={{
-                ...styles.riskIndicator,
-                background: alert.risk === 'Critical' ? 'var(--alert-red)' : alert.risk === 'High' ? 'var(--accent-orange)' : 'var(--electric-blue)'
-              }}></div>
               <div style={styles.alertMain}>
                 <div style={styles.alertEntity}>{alert.entity}</div>
                 <div style={styles.alertMeta} className="mono">
@@ -94,10 +94,6 @@ export default function RightPanel({ onNavigate }) {
             </motion.div>
           ))}
         </div>
-        
-        <button style={styles.viewAll} onClick={() => onNavigate('Alerts')}>
-          VIEW ALL FORENSIC ALERTS
-        </button>
       </div>
     </div>
   );
@@ -144,57 +140,59 @@ const styles = {
     fontFamily: 'JetBrains Mono, monospace',
   },
   aiPanel: {
-    padding: '24px',
-    background: 'var(--card-gradient)',
-    border: '1px solid var(--border-heavy)',
+    padding: '20px',
+    background: 'linear-gradient(135deg, rgba(188, 0, 255, 0.1) 0%, rgba(5, 5, 16, 0.9) 100%)',
+    border: '1px solid rgba(188, 0, 255, 0.3)',
     borderRadius: '12px',
-    boxShadow: 'var(--glass-shadow), var(--inset-shadow)',
+    boxShadow: '0 0 20px rgba(188, 0, 255, 0.1)',
   },
   aiHeader: {
     display: 'flex',
     alignItems: 'center',
     gap: '12px',
-    marginBottom: '20px',
+    marginBottom: '16px',
   },
   aiIcon: {
-    width: '36px',
-    height: '36px',
-    borderRadius: '12px',
-    background: 'var(--brand-gradient)',
+    width: '32px',
+    height: '32px',
+    borderRadius: '8px',
+    background: '#bc00ff',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    boxShadow: '0 4px 15px rgba(188, 0, 255, 0.3)',
+    boxShadow: '0 0 15px rgba(188, 0, 255, 0.4)',
   },
   aiTitle: {
-    fontSize: '0.8rem',
+    fontSize: '0.7rem',
     fontWeight: 900,
     letterSpacing: '0.05em',
-    color: 'var(--text-primary)',
+    color: '#ffffff',
   },
   aiStatus: {
-    fontSize: '0.65rem',
-    color: 'var(--accent-orange)',
-    fontWeight: 800,
+    fontSize: '0.6rem',
+    color: 'rgba(255,255,255,0.4)',
+    fontWeight: 700,
   },
   aiContent: {
-    background: 'var(--bg-secondary)',
-    borderRadius: '12px',
+    background: 'rgba(0,0,0,0.2)',
+    borderRadius: '10px',
     padding: '16px',
-    border: '1px solid var(--border-color)',
+    border: '1px solid rgba(255,255,255,0.05)',
   },
-  aiText: {
-    fontSize: '0.8rem',
-    lineHeight: 1.6,
-    color: 'var(--text-secondary)',
-    margin: '0 0 16px 0',
+  aiAlertHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+    marginBottom: '8px',
   },
   sarBtn: {
     width: '100%',
-    height: '36px',
+    height: '34px',
     fontSize: '0.7rem',
     gap: '8px',
-    fontWeight: 700,
+    fontWeight: 800,
+    background: 'var(--btn-primary)',
+    boxShadow: '0 4px 12px rgba(188, 0, 255, 0.2)',
   },
   feedColumn: {
     flex: 1,

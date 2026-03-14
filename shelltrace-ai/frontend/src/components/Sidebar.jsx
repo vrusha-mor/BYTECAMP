@@ -1,32 +1,37 @@
 import { 
-  Activity, 
   RotateCcw, 
-  MousePointer2, 
-  TrendingUp, 
-  Layers, 
-  UserCheck, 
-  Users, 
-  BarChart3, 
+  ArrowRightLeft, 
+  RotateCw, 
+  LogIn, 
+  LogOut, 
+  Link as LinkIcon, 
+  Grid, 
+  Clock, 
+  User, 
+  MapPin, 
   FolderOpen, 
-  Archive,
+  FolderMinus,
   ChevronDown
 } from 'lucide-react';
 
 export default function Sidebar({ activeView, onNavigate }) {
   
   const detectionSuite = [
-    { name: 'Circular', icon: RotateCcw, view: 'Circular Flow' },
-    { name: 'Smurfing', icon: MousePointer2, view: 'Smurfing' },
-    { name: 'Velocity', icon: TrendingUp, view: 'Velocity' },
-    { name: 'Layering', icon: Layers, view: 'Layering' },
-    { name: 'PEP', icon: UserCheck, view: 'PEP' },
-    { name: 'Codirect.', icon: Users, view: 'Codirect.' },
-    { name: 'Anomalies', icon: BarChart3, view: 'Anomalies' },
+    { name: 'Circular Flow', icon: RotateCcw, view: 'Circular Flow', badge: 3 },
+    { name: 'Mirror Transactions', icon: ArrowRightLeft, view: 'Mirror Transactions', badge: 5 },
+    { name: 'Round Trip', icon: RotateCw, view: 'Round Trip', badge: 2 },
+    { name: 'Fan-In', icon: LogIn, view: 'Fan-In', badge: 7 },
+    { name: 'Fan-Out', icon: LogOut, view: 'Fan-Out', badge: 4 },
+    { name: 'Single Source Dependency', icon: LinkIcon, view: 'Single Source Dependency' },
+    { name: 'Amount Clustering', icon: Grid, view: 'Amount Clustering', badge: 8 },
+    { name: 'Off-Hours Transaction', icon: Clock, view: 'Off-Hours Transaction', badge: 2 },
+    { name: 'Age vs Amount Mismatch', icon: User, view: 'Age vs Amount Mismatch' },
+    { name: 'First-Time Jurisdiction', icon: MapPin, view: 'First-Time Jurisdiction', badge: 1 },
   ];
 
   const caseCenter = [
     { name: 'OPEN', icon: FolderOpen, view: 'Cases' },
-    { name: 'CLOSED', icon: Archive, view: 'Closed Cases' },
+    { name: 'CLOSED', icon: FolderMinus, view: 'Closed Cases' },
   ];
 
   return (
@@ -68,8 +73,8 @@ export default function Sidebar({ activeView, onNavigate }) {
               className="nav-hover"
             >
               <item.icon size={18} />
-              <span>{item.name}</span>
-              {item.name === 'Circular' && <div style={styles.badge}>3</div>}
+              <span style={{ fontSize: '0.8rem' }}>{item.name}</span>
+              {item.badge && <div style={styles.badge}>{item.badge}</div>}
             </button>
           ))}
         </div>

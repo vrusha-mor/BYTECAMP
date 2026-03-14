@@ -5,16 +5,18 @@ export default function TopNav({ theme, toggleTheme, onNavigate }) {
     <div style={styles.container}>
       {/* Brand Identity */}
       <div style={styles.brand}>
-        <div style={styles.logoIcon}>N</div>
-        <h2 style={styles.brandName}>NEXARA <span style={{ color: 'var(--text-secondary)', fontWeight: 400 }}>AML INTELLIGENCE</span></h2>
+        <div style={styles.logoIcon}>
+          <div style={styles.logoCube}></div>
+        </div>
+        <h2 style={styles.brandName}>NEXARA <span style={{ color: 'var(--text-secondary)', fontWeight: 400, fontSize: '0.8rem' }}>AML INTELLIGENCE</span></h2>
       </div>
 
       {/* Search Bar */}
       <div style={styles.searchWrap}>
-        <Search size={18} color="var(--text-secondary)" />
+        <Search size={16} color="var(--text-secondary)" />
         <input 
           type="text" 
-          placeholder="Global Forensic Search (Entity, TXID, Wallet...)" 
+          placeholder="Global Forensic Search (Entity, Entity)" 
           style={styles.searchInput} 
         />
         <div style={styles.searchShortcut} className="mono">/</div>
@@ -72,50 +74,55 @@ const styles = {
     minWidth: '280px',
   },
   logoIcon: {
-    width: '32px',
-    height: '32px',
+    width: '28px',
+    height: '28px',
     background: 'var(--btn-primary)',
-    borderRadius: '8px',
+    borderRadius: '6px',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    color: 'white',
-    fontSize: '1.2rem',
-    fontWeight: 800,
-    boxShadow: '0 0 15px rgba(188, 0, 255, 0.3)',
+    position: 'relative',
+    overflow: 'hidden',
+    boxShadow: '0 0 15px rgba(188, 0, 255, 0.4)',
+  },
+  logoCube: {
+    width: '12px',
+    height: '12px',
+    border: '2px solid white',
+    transform: 'rotate(45deg)',
   },
   brandName: {
-    fontSize: '1rem',
+    fontSize: '0.9rem',
     margin: 0,
-    letterSpacing: '0.05em',
-    fontWeight: 700,
+    letterSpacing: '0.08em',
+    fontWeight: 800,
+    color: '#ffffff',
   },
   searchWrap: {
     flex: 1,
-    maxWidth: '500px',
+    maxWidth: '400px',
     display: 'flex',
     alignItems: 'center',
-    background: 'var(--bg-secondary)',
+    background: 'rgba(255,255,255,0.03)',
     border: '1px solid var(--border-heavy)',
     borderRadius: '8px',
     padding: '0 12px',
-    height: '40px',
+    height: '34px',
     position: 'relative',
-    boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.02)',
   },
   searchInput: {
     flex: 1,
     background: 'transparent',
     border: 'none',
     color: 'var(--text-primary)',
-    fontSize: '0.85rem',
+    fontSize: '0.8rem',
     padding: '0 12px',
     outline: 'none',
   },
   searchShortcut: {
-    fontSize: '0.7rem',
-    background: 'var(--border-color)',
-    padding: '2px 8px',
+    fontSize: '0.65rem',
+    background: 'rgba(255,255,255,0.1)',
+    padding: '2px 6px',
     borderRadius: '4px',
     color: 'var(--text-secondary)',
     fontWeight: 700,
@@ -123,21 +130,26 @@ const styles = {
   actions: {
     display: 'flex',
     alignItems: 'center',
-    gap: '16px',
+    gap: '12px',
   },
   scanBtn: {
-    height: '36px',
-    fontSize: '0.75rem',
-    fontWeight: 700,
+    height: '32px',
+    fontSize: '0.7rem',
+    fontWeight: 800,
     background: 'var(--btn-primary)',
-    boxShadow: '0 4px 12px rgba(188, 0, 255, 0.2)',
+    boxShadow: '0 0 20px rgba(188, 0, 255, 0.3)',
     padding: '0 16px',
+    borderRadius: '8px',
   },
   toolBtn: {
-    height: '36px',
-    fontSize: '0.75rem',
-    borderColor: 'var(--border-color)',
+    height: '32px',
+    fontSize: '0.7rem',
+    fontWeight: 700,
+    background: 'rgba(255,255,255,0.03)',
+    border: '1px solid var(--border-heavy)',
     padding: '0 16px',
+    borderRadius: '8px',
+    color: '#ffffff',
   },
   divider: {
     width: '1px',

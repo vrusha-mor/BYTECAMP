@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { QrCode, Camera, ShieldCheck, User, Cpu, ChevronRight, Zap, RefreshCcw, FileText, CheckCircle2, Upload } from 'lucide-react';
 
 export default function AadharVerification({ onComplete }) {
